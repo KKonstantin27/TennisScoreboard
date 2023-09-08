@@ -8,8 +8,4 @@ import java.io.UnsupportedEncodingException;
 
 public class BaseServlet extends HttpServlet {
 
-    protected void configUTF(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json; charset=UTF-8");
-    }
 }

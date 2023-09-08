@@ -14,8 +14,10 @@ public class NewMatchServlet extends BaseServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String player1 = request.getParameter("first-player-name");
+        String player2 = request.getParameter("second-player-name");
+
     }
 }
