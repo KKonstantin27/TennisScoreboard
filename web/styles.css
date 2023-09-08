@@ -1,0 +1,82 @@
+body {
+    background-image: url("444.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #EDEC66;
+    font-family: "Century Gothic";
+}
+h1 {
+    padding: 15px;
+    font-size: 40px;
+}
+h2 {
+    font-size: 30px;
+    display: inline;
+}
+.new-match {
+    margin: 17px 17px 17px 5px;
+}
+.match-list {
+    margin: 17px 5px 17px 5px;
+}
+
+div {
+    display: flex;
+    background-color: rgba(39, 80, 133, 0.7);
+    width: 530px;
+    height: 70px;
+    opacity: 50;
+    margin: 25px auto 25px auto;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    display: block;
+    width: 80%;
+    margin: auto;
+    height: 2em;
+    size: 10px;
+}
+
+.button {
+    background-color: rgb(39, 80, 133);
+    color: #EDEC66;
+    font-family: "Century Gothic";
+    font-weight: bold;
+    font-size: 30px;
+    height: 50px;
+    margin: 13px auto;
+    border-color: #EDEC66;
+}
+
+.main-page-return {
+    text-align: center;
+    margin-top: 100px;
+    padding-top: 0;
+}
+
+a {
+    color: #EDEC66;
+    text-decoration-line: none;
+
+}
+
+a:visited {
+    color: #EDEC66;
+}
+
+a:hover {
+    color: #ED4F4E;
+}
+
+a:active {
+    color: #ED4F4E;
+}

@@ -1,0 +1,26 @@
+body {
+
+    background-image: url("https://i.pinimg.com/564x/aa/de/23/aade2366b70ecbc46b1d2dd0a5d93cef.jpg");
+    background-repeat: no-repeat;
+
+}
+h1, h2 {
+    text-align: center;
+    color: white;
+}
+
+a {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: brown;
+}
+
+a:active {
+    color: brown;
+}
