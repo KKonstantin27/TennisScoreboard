@@ -1,9 +1,18 @@
 package models;
 
-import jakarta.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
+
+import javax.persistence.*;
 import java.util.List;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "Players")
 public class Player {
@@ -13,64 +22,10 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "Name")
+    @Column(name = "Name", nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "player1")
-    private List<Match> matchesAsPlayer1;
-
-    @OneToMany(mappedBy = "player2")
-    private List<Match> matchesAsPlayer2;
-
-    @OneToMany(mappedBy = "winner")
-    private List<Match> matchesAsWinner;
-
-    public Player() {
-
-    }
-
-    public Player(int id, String name) {
-        this.id = id;
+    public Player(String name) {
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Match> getMatchesAsPlayer1() {
-        return matchesAsPlayer1;
-    }
-
-    public void setMatchesAsPlayer1(List<Match> matchesAsPlayer1) {
-        this.matchesAsPlayer1 = matchesAsPlayer1;
-    }
-
-    public List<Match> getMatchesAsPlayer2() {
-        return matchesAsPlayer2;
-    }
-
-    public void setMatchesAsPlayer2(List<Match> matchesAsPlayer2) {
-        this.matchesAsPlayer2 = matchesAsPlayer2;
-    }
-
-    public List<Match> getMatchesAsWinner() {
-        return matchesAsWinner;
-    }
-
-    public void setMatchesAsWinner(List<Match> matchesAsWinner) {
-        this.matchesAsWinner = matchesAsWinner;
     }
 }
