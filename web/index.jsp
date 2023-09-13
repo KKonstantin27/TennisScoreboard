@@ -14,12 +14,12 @@
   </head>
   <body>
   <h1>Табло теннисного матча</h1>
-  <div>
+  <div class="section">
     <img src="11.png">
     <h2 class="new-match"><a href="newMatch.jsp">Новый матч</a></h2>
   </div>
 
-  <div>
+  <div class="section">
     <img src="22.png">
     <h2 class="match-list"><a href="">Список завершённых матчей</a></h2>
   </div>

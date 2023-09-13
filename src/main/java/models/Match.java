@@ -1,12 +1,9 @@
 package models;
 
-
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor

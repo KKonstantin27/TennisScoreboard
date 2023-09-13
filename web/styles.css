@@ -24,8 +24,17 @@ h2 {
     margin: 17px 5px 17px 5px;
 }
 
-div {
+.div-icons {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
     background-color: rgba(39, 80, 133, 0.7);
     width: 530px;
     height: 70px;
@@ -56,11 +65,171 @@ input {
     margin: 13px auto;
     border-color: #EDEC66;
 }
+.score-board-border {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    height: 450px;
+    background-color: #264c59;
+    margin: 10px auto;
 
+}
+.border {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: azure;
+    width: 780px;
+    height: 430px;
+
+
+}
+.inner-part {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 766px;
+    height: 416px;
+    background-color: #264c59;
+}
 .main-page-return {
     text-align: center;
     margin-top: 100px;
     padding-top: 0;
+}
+.match-id {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 610px;
+    height: 80px;
+    background-color: #05282f;
+    margin-top: 7px;
+}
+.match-id-text {
+    font-size: 27px;
+    font-weight: bold;
+    text-align: center;
+    color: #c03b31;
+}
+.score-up-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 100px;
+    margin-bottom: 0px;
+}
+.first-line, .third-line {
+    display: flex;
+    flex-direction: row;
+    justify-self: left;
+    align-self: start;
+    margin: 30px;
+}
+.first-line {
+    margin-bottom: 20px;
+}
+.third-line {
+    margin-top: 20px;
+}
+
+.second-line {
+    display: flex;
+    flex-direction: row;
+    justify-self: right;
+    align-self: end;
+    margin: 0px;
+}
+
+.player1, .player2 {
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 255px;
+    height: 100px;
+    font-family: "Century Gothic";
+    font-size: 40px;
+    font-weight: bold;
+    color: azure;
+
+}
+
+.score-up-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-self: center;
+    align-self: center;
+    width: 50px;
+    height: 50px;
+    background-color: #05282f;
+    border-color: #05282f;
+    color: #c03b31;
+    font-family: "Century Gothic";
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.set1, .set2, .set3, .game, .score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-family: "Century Gothic";
+    font-size: 20px;
+    font-weight: bold;
+    color: azure;
+    width: 60px;
+    margin-left: 20px;
+    margin-bottom: 0;
+}
+.set3 {
+    margin-right: 30px;
+}
+.game {
+    width: 120px;
+}
+.score {
+    margin-right: -3px;
+}
+
+.game-area {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 100px;
+    background-color: #05282f;
+    font-family: "Century Gothic";
+    font-size: 70px;
+    font-weight: bold;
+    color: #c03b31;
+}
+
+.set-area {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 100px;
+    background-color: #05282f;
+    margin-left: 20px;
+    font-family: "Century Gothic";
+    font-size: 70px;
+    font-weight: bold;
+    color: #c03b31;
 }
 
 a {
