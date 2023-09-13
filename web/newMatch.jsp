@@ -20,7 +20,7 @@
       <div class="section second-player-name"><div class="div-icons"><img src="33.png"></div><div><label for="second-player-name"><h2>Имя второго игрока</h2> <input id="second-player-name" name="second-player-name" type="text" required placeholder="РАФАЭЛЬ НАДАЛЬ"/></label></div></div>
       <div class="section submit"><input class="button" type="submit" value="Создать матч" /></div>
     </form>
-    <p class="main-page-return"><a href="index.jsp">Главная страница</a></p>
+    <p class="main-page-return"><a href="/TennisScoreboard_war_exploded/">Главная страница</a></p>
 
   </body>
 </html>

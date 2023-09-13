@@ -16,7 +16,7 @@
   <h1>Табло теннисного матча</h1>
   <div class="section">
     <img src="11.png">
-    <h2 class="new-match"><a href="newMatch.jsp">Новый матч</a></h2>
+    <h2 class="new-match"><a href="/TennisScoreboard_war_exploded/new-match">Новый матч</a></h2>
   </div>
 
   <div class="section">

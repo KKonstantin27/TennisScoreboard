@@ -1,6 +1,7 @@
 package services;
 
 import models.Match;
+import models.MatchScore;
 import models.Player;
 
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class OngoingMatchesService {
-    private HashMap<UUID, Match> ongoingMatches = new HashMap<>();
+    private static HashMap<UUID, MatchScore> ongoingMatches = new HashMap<>();
 
     public String createOngoingMatch(Player player1, Player player2) {
         Match ongoingMatch = new Match(player1, player2);
@@ -16,11 +17,11 @@ public class OngoingMatchesService {
     }
     private String addOngoingMatch(Match ongoingMatch) {
         UUID uuid = UUID.randomUUID();
-        ongoingMatches.put(uuid, ongoingMatch);
+        ongoingMatches.put(uuid, new MatchScore(ongoingMatch));
         return uuid.toString();
     }
 
-    public Match getOngoingMatch (UUID uuid) {
+    public MatchScore getOngoingMatch (UUID uuid) {
         return ongoingMatches.get(uuid);
     }
 }
