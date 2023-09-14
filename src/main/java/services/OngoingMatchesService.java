@@ -24,4 +24,5 @@ public class OngoingMatchesService {
     public MatchScore getOngoingMatch (UUID uuid) {
         return ongoingMatches.get(uuid);
     }
+    public void removeOngoingMatch (UUID uuid) {ongoingMatches.remove(uuid); }
 }

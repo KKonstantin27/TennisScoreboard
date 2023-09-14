@@ -21,6 +21,8 @@ public class NewMatchServlet extends BaseServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String player1Name = request.getParameter("first-player-name");
         String player2Name = request.getParameter("second-player-name");
         Player player1 = playerDAO.getByName(player1Name);

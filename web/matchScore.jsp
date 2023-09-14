@@ -1,4 +1,6 @@
-<%@ page import="models.MatchScore" %><%--
+<%@ page import="models.MatchScore" %>
+<%@ page import="models.Player" %>
+<%@ page import="java.lang.String" %><%--
   Created by IntelliJ IDEA.
   User: Konstantin
   Date: 07.09.2023
@@ -19,22 +21,22 @@
         <div class="inner-part">
           <div class="match-id"><h2 class="match-id-text">ID: <%= request.getParameter("uuid") %></h2></div>
           <div class="first-line">
-            <span class="player1"><%= request.getAttribute("Player1") %></span>
-            <form class="score-up-form" method="post" action="">
-              <input class="score-up-submit" type="submit" value="+" />
+            <span class="player1"><%= ((Player) request.getAttribute("Player1")).getName() %></span>
+            <form class="score-up-form" method="post" action="/TennisScoreboard_war_exploded/match-score">
+              <button class="score-up-submit" type="submit" name="ID" value="<%= ((Player) request.getAttribute("Player1")).getId() %>">+</button>
             </form>
             <span class="game-area">
-              <% MatchScore match = (MatchScore) request.getAttribute("MatchScore");%>
-              <%=String.format("%02d", match.getP1Score())%>
+              <% MatchScore matchScore = (MatchScore) request.getAttribute("MatchScore");%>
+              <%=String.format("%02d", matchScore.getP1CurrentScore())%>
             </span>
             <span class="set-area">
-              <%= match.getP1Set1()%>
+              <%= matchScore.getP1SetScore().get(1)%>
             </span>
             <span class="set-area">
-              <%= match.getP1Set2()%>
+              <%= matchScore.getP1SetScore().get(2)%>
             </span>
             <span class="set-area">
-              <%= match.getP1Set1()%>
+              <%= matchScore.getP1SetScore().get(3)%>
             </span>
           </div>
           <div class="second-line">
@@ -45,21 +47,21 @@
             <span class="set3">SET3</span>
           </div>
           <div class="third-line">
-            <span class="player2"><%= request.getAttribute("Player2") %></span>
+            <span class="player2"><%= ((Player) request.getAttribute("Player2")).getName() %></span>
             <form class="score-up-form" method="post" action="">
-              <input class="score-up-submit" type="submit" value="+" />
+              <button class="score-up-submit" type="submit" name="ID" value="<%= ((Player) request.getAttribute("Player2")).getId() %>">+</button>
             </form>
             <span class="game-area">
-              <%=String.format("%02d", match.getP2Score())%>
+              <%=String.format("%02d", matchScore.getP2CurrentScore())%>
             </span>
             <span class="set-area">
-              <%= match.getP2Set1()%>
+              <%= matchScore.getP2SetScore().get(1)%>
             </span>
             <span class="set-area">
-              <%= match.getP2Set2()%>
+              <%= matchScore.getP2SetScore().get(2)%>
             </span>
             <span class="set-area">
-              <%= match.getP2Set3()%>
+              <%= matchScore.getP2SetScore().get(3)%>
             </span>
           </div>
         </div>
