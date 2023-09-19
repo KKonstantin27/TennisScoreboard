@@ -16,18 +16,17 @@ import java.nio.charset.StandardCharsets;
 public class NewMatchServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("newMatch.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/newMatch.jsp");
         dispatcher.forward(request, response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
+        configUTF(request, response);
         String player1Name = request.getParameter("first-player-name");
         String player2Name = request.getParameter("second-player-name");
         Player player1 = playerDAO.getByName(player1Name);
         Player player2 = playerDAO.getByName(player2Name);
         String currentMatchUUID = ongoingMatchesService.createOngoingMatch(player1, player2);
-        response.sendRedirect("/TennisScoreboard_war_exploded/match-score" + "?uuid=" + URLEncoder.encode(currentMatchUUID, StandardCharsets.UTF_8));
+        response.sendRedirect("/match-score" + "?uuid=" + URLEncoder.encode(currentMatchUUID, StandardCharsets.UTF_8));
     }
 }

@@ -1,5 +1,6 @@
 package services;
 
+import models.Match;
 import models.MatchScore;
 
 import java.util.UUID;
@@ -11,26 +12,26 @@ public class CalculationService {
 
 
 
-    public void calculate(int id, MatchScore matchScore, UUID uuid) {
+    public MatchScore calculate(int id, MatchScore matchScore, UUID uuid) {
         this.matchScore = matchScore;
         currentSet = matchScore.getCurrentSet();
         defineScoringPlayer(id);
         plusScore();
         if (matchScore.isTieBreak()) {
-            if (checkTieBreak(matchScore.getP1CurrentScore(), matchScore.getP2CurrentScore())) {return;}
+            if (checkTieBreak(matchScore.getP1CurrentScore(), matchScore.getP2CurrentScore())) {
+                return matchScore;
+            }
         }
-        if (checkGame(matchScore.getP1CurrentScore(), matchScore.getP2CurrentScore())) {return;}
+        if (checkGame(matchScore.getP1CurrentScore(), matchScore.getP2CurrentScore())) {return matchScore;}
         plusGame();
-        if (checkSet(matchScore.getP1CurrentSetScore(), matchScore.getP2CurrentSetScore())) {return;}
+        if (checkSet(matchScore.getP1CurrentSetScore(), matchScore.getP2CurrentSetScore())) {return matchScore;}
         plusSet();
         matchScore.setTieBreak(false);
         if (checkMatch(matchScore.getP1MatchScore(), matchScore.getP2MatchScore())) {
-            OngoingMatchesService ongoingMatchesService = new OngoingMatchesService();
-            FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
             matchScore.setMatchEnded(true);
-            ongoingMatchesService.removeOngoingMatch(uuid);
-            finishedMatchesPersistenceService.saveFinishedMatch(matchScore.getMatch());
+            setMatchWinner();
         }
+        return matchScore;
     }
 
     private void plusScore() {
@@ -42,9 +43,9 @@ public class CalculationService {
     }
     private boolean checkGame(int p1CurrentScore, int p2CurrentScore) {
         boolean isGameContinues= true;
-        if ((p1CurrentScore == 5 && p2CurrentScore < 4) || (p1CurrentScore < 4 && p2CurrentScore == 5))  {
+        if ((p1CurrentScore == 4 && p2CurrentScore < 3) || (p1CurrentScore < 3 && p2CurrentScore == 4))  {
             isGameContinues = false;
-        } else if ((p1CurrentScore > 5 || p2CurrentScore > 5) && (Math.abs(p1CurrentScore - p2CurrentScore)) == 2) {
+        } else if ((p1CurrentScore > 4 || p2CurrentScore > 4) && (Math.abs(p1CurrentScore - p2CurrentScore)) >= 2) {
             isGameContinues = false;
         }
         return isGameContinues;
@@ -65,8 +66,6 @@ public class CalculationService {
         } else if (p1CurrentSetScore == 7 || p2CurrentSetScore == 7) {
             isSetContinues = false;
         } else if (p1CurrentSetScore == 6 && p2CurrentSetScore == 6) {
-            isSetContinues = false;
-            matchScore.setTieBreak(true);
             startTieBreak();
         }
         return isSetContinues;
@@ -93,6 +92,7 @@ public class CalculationService {
         return isMatchEnded;
     }
     private void startTieBreak() {
+        matchScore.setTieBreak(true);
         matchScore.setP1CurrentScore(0);
         matchScore.setP2CurrentScore(0);
     }
@@ -107,5 +107,12 @@ public class CalculationService {
     }
     private void defineScoringPlayer(int id) {
         scoringPlayer = id == matchScore.getMatch().getPlayer1().getId() ? 1 : 2;
+    }
+    private void setMatchWinner() {
+        if (scoringPlayer == 1) {
+            matchScore.getMatch().setWinner(matchScore.getMatch().getPlayer1());
+        } else {
+            matchScore.getMatch().setWinner(matchScore.getMatch().getPlayer2());
+        }
     }
 }

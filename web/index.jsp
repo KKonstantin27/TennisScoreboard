@@ -9,20 +9,22 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>TennisScoreboard</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Tennis Scoreboard</title>
+    <link rel="stylesheet" href="view/styles.css" />
   </head>
   <body>
   <h1>Табло теннисного матча</h1>
   <div class="section">
-    <img src="11.png">
-    <h2 class="new-match"><a href="/TennisScoreboard_war_exploded/new-match">Новый матч</a></h2>
+    <img src="/img/new_match_icon.png">
+    <h2 class="new-match"><a href="/new-match">Новый матч</a></h2>
   </div>
 
   <div class="section">
-    <img src="22.png">
+    <img src="/img/match_list_icon.png">
     <h2 class="match-list"><a href="">Список завершённых матчей</a></h2>
   </div>
-
   </body>
+<footer class="main-page-footer">
+  icon by <a target="_blank" href="https://icons8.com"> Icons8</a>
+</footer>
 </html>

@@ -8,8 +8,9 @@ import java.util.*;
 public class MatchScore {
     private Match match;
     private int currentSet;
-    private Map<Integer, Integer> p1Score;
-    private Map<Integer, Integer> p2Score;
+    private UUID uuid;
+    private int p1CurrentScore;
+    private int p2CurrentScore;
     private Map<Integer, Integer> p1SetScore;
     private Map<Integer, Integer> p2SetScore;
     private int p1MatchScore;
@@ -17,11 +18,12 @@ public class MatchScore {
     private boolean TieBreak;
     private boolean MatchEnded;
 
-    public MatchScore (Match match) {
+    public MatchScore (Match match, UUID uuid) {
         this.match = match;
+        this.uuid = uuid;
         this.currentSet = 1;
-        this.p1Score = fillStartValues();
-        this.p2Score = fillStartValues();
+        this.p1CurrentScore = 0;
+        this.p2CurrentScore = 0;
         this.p1SetScore = fillStartValues();
         this.p2SetScore = fillStartValues();
         this.p1MatchScore = 0;
@@ -37,24 +39,12 @@ public class MatchScore {
         }
         return setScore;
     }
-    public int getP1CurrentScore() {
-        return p1Score.get(currentSet);
-    }
 
-    public int getP2CurrentScore() {
-        return p2Score.get(currentSet);
-    }
     public int getP1CurrentSetScore() {
         return p1SetScore.get(currentSet);
     }
     public int getP2CurrentSetScore() {
         return p2SetScore.get(currentSet);
-    }
-    public void setP1CurrentScore(int p1CurrentScore) {
-        p1Score.put(currentSet, p1CurrentScore);
-    }
-    public void setP2CurrentScore(int p2CurrentScore) {
-        p2Score.put(currentSet, p2CurrentScore);
     }
     public void setP1CurrentSetScore(int p1CurrentSetScore) {
         p1SetScore.put(currentSet, p1CurrentSetScore);

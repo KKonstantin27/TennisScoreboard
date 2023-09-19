@@ -1,5 +1,6 @@
 package controllers;
 
+import DTO.MatchScoreDTO;
 import models.MatchScore;
 
 
@@ -9,37 +10,37 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @WebServlet(name = "MatchScoreServlet", value = "/match-score")
 public class MatchScoreServlet extends BaseServlet {
-    UUID uuid;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("matchScore.jsp");
-        uuid = UUID.fromString(request.getParameter("uuid"));
-        MatchScore matchScore = ongoingMatchesService.getOngoingMatch(uuid);
-        request.setAttribute("MatchScore", matchScore);
-        request.setAttribute("Player1", matchScore.getMatch().getPlayer1());
-        request.setAttribute("Player2", matchScore.getMatch().getPlayer2());
+        configUTF(request, response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/ongoingMatch.jsp");
+        MatchScore matchScore = ongoingMatchesService.getOngoingMatch(UUID.fromString(request.getParameter("uuid")));
+        setMatchAttributes(request, response, mapper.convertToDTO(matchScore));
         dispatcher.forward(request, response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("ID"));
-
+        configUTF(request, response);
+        int scoringPlayerNumber = Integer.parseInt(request.getParameter("scoringPlayerNumber"));
+        RequestDispatcher dispatcher = request.getRequestDispatcher("finishedMatch.jsp");
+        UUID uuid = UUID.fromString(request.getParameter("uuid").toString());
         MatchScore matchScore = ongoingMatchesService.getOngoingMatch(uuid);
-        calculationService.calculate(id, matchScore, uuid);
+        matchScore = calculationService.calculate(scoringPlayerNumber, matchScore, uuid);
+        MatchScoreDTO matchScoreDTO = mapper.convertToDTO(matchScore);
         if (matchScore.isMatchEnded()) {
-            PrintWriter pw = response.getWriter();
-            pw.println("Match ended");
+            ongoingMatchesService.removeOngoingMatch(uuid);
+            int matchID = finishedMatchesService.saveFinishedMatch(matchScore.getMatch());
+            setMatchAttributes(request, response, matchScoreDTO);
+            setFinishedMatchAttributes(request, response, matchScoreDTO, matchID);
+            dispatcher.forward(request, response);
         } else {
-            response.sendRedirect("/TennisScoreboard_war_exploded/match-score" + "?uuid=" + URLEncoder.encode(uuid.toString(), StandardCharsets.UTF_8));
+            response.sendRedirect("/match-score" + "?uuid=" + URLEncoder.encode(uuid.toString(), StandardCharsets.UTF_8));
         }
     }
 }

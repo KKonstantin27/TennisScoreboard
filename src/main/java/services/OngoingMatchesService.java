@@ -17,7 +17,7 @@ public class OngoingMatchesService {
     }
     private String addOngoingMatch(Match ongoingMatch) {
         UUID uuid = UUID.randomUUID();
-        ongoingMatches.put(uuid, new MatchScore(ongoingMatch));
+        ongoingMatches.put(uuid, new MatchScore(ongoingMatch, uuid));
         return uuid.toString();
     }
 

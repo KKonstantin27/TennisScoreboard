@@ -1,8 +1,18 @@
 body {
-    background-image: url("444.jpg");
+    background-image: url("/img/background_image.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+footer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: #EDEC66;
+    font-family: "Century Gothic";
+    margin-top: 200px;
+}
+
 
 h1, h2 {
     text-align: center;
@@ -102,7 +112,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 610px;
+    width: 650px;
     height: 80px;
     background-color: #05282f;
     margin-top: 7px;
@@ -113,6 +123,7 @@ input {
     text-align: center;
     color: #c03b31;
 }
+
 .score-up-form {
     display: flex;
     justify-content: center;
@@ -121,6 +132,7 @@ input {
     height: 100px;
     margin-bottom: 0px;
 }
+
 .first-line, .third-line {
     display: flex;
     flex-direction: row;
@@ -230,6 +242,27 @@ input {
     font-size: 70px;
     font-weight: bold;
     color: #c03b31;
+}
+.winner-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 100px;
+    margin-bottom: 0px;
+}
+.winner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-self: center;
+    align-self: center;
+    width: 50px;
+    height: 50px;
+    background-color: #264c59;
+    margin: 20px;
 }
 
 a {
