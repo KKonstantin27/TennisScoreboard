@@ -27,8 +27,8 @@ public class MatchScoreServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         configUTF(request, response);
-        int scoringPlayerNumber = Integer.parseInt(request.getParameter("scoringPlayerNumber"));
-        RequestDispatcher dispatcher = request.getRequestDispatcher("finishedMatch.jsp");
+        int scoringPlayerNumber = Integer.parseInt(request.getParameter("scoringPlayerID"));
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/finishedMatch.jsp");
         UUID uuid = UUID.fromString(request.getParameter("uuid").toString());
         MatchScore matchScore = ongoingMatchesService.getOngoingMatch(uuid);
         matchScore = calculationService.calculate(scoringPlayerNumber, matchScore, uuid);

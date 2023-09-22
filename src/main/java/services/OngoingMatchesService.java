@@ -6,10 +6,12 @@ import models.Player;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class OngoingMatchesService {
-    private static HashMap<UUID, MatchScore> ongoingMatches = new HashMap<>();
+    private static Map<UUID, MatchScore> ongoingMatches = new ConcurrentHashMap<>();
 
     public String createOngoingMatch(Player player1, Player player2) {
         Match ongoingMatch = new Match(player1, player2);

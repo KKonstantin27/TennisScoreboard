@@ -1,8 +1,7 @@
-<%@ page import="models.MatchScore" %>
 <%@ page import="models.Player" %>
 <%@ page import="java.lang.String" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
+<%@ page import="DTO.MatchScoreDTO" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%--
   Created by IntelliJ IDEA.
   User: Konstantin
   Date: 07.09.2023
@@ -13,71 +12,64 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Finished Match</title>
+    <title>Finished match</title>
     <link rel="stylesheet" href="view/styles.css" />
   </head>
   <body>
-    <h1>Завершённый матч</h1>
-    <div class="score-board-border">
-      <div class="border">
-        <div class="inner-part">
-          <div class="match-id"><h2 class="match-id-text">ID: <c:out value="${MatchID}" /></h2></div>
-          <div class="first-line">
-            <span class="player1"><c:out value="${P1Name}"/></span>
-            <span class="winner-area">
-              <span class="winner">
-
-              </span>
-            </span>
-            <span class="game-area">
-              <c:if test="${IsPlayer1Winner == true}">
-                <img src="/img/cup_icon.png">
-              </c:if>
-            </span>
-            <span class="set-area">
-              <c:out value="${P1Set1Score}"/>
-            </span>
-            <span class="set-area">
-              <c:out value="${P1Set2Score}"/>
-            </span>
-            <span class="set-area">
-              <c:out value="${P1Set3Score}"/>
-            </span>
+  <div class="body-up">
+      <h1>Завершённый матч</h1>
+      <div class="ongoingMatch-scoreboard-base">
+          <div class="ongoingMatch-scoreboard-border">
+              <div class="ongoingMatch-scoreboard-innerPart">
+                  <div class="ongoingMatch-match-id"><h2 class="ongoingMatch-match-id-text">ID: <c:out value="${ongoingMatch.match.id}" /></h2></div>
+                  <div class="ongoingMatch-first-line">
+                      <span class="ongoingMatch-player"><c:out value="${ongoingMatch.match.player1.name}"/></span>
+                      <span class="finishedMatch-insteadForm">
+                        <span class="finishedMatch-insteadButton"> </span>
+                      </span>
+                      <span class="ongoingMatch-gameArea">
+                        <c:if test="${ongoingMatch.match.player1 == ongoingMatch.match.winner}">
+                            <img src="/img/cup_icon.png">
+                        </c:if>
+                      </span>
+                      <c:forEach var="p1SetScore" items="${p1SetScores}">
+                          <span class="ongoingMatch-setArea">
+                              <c:out value="${p1SetScore.value}"/>
+                          </span>
+                      </c:forEach>
+                  </div>
+                  <div class="ongoingMatch-second-line">
+                      <span class="ongoingMatch-score"></span>
+                      <span class="ongoingMatch-game">WINNER</span>
+                      <span class="ongoingMatch-set">SET1</span>
+                      <span class="ongoingMatch-set">SET2</span>
+                      <span class="ongoingMatch-set3">SET3</span>
+                  </div>
+                  <div class="ongoingMatch-third-line">
+                      <span class="ongoingMatch-player"><c:out value="${ongoingMatch.match.player2.name}"/></span>
+                      <span class="finishedMatch-insteadForm">
+                        <span class="finishedMatch-insteadButton"> </span>
+                      </span>
+                      <span class="ongoingMatch-gameArea">
+                        <c:if test="${ongoingMatch.match.player2 == ongoingMatch.match.winner}">
+                            <img src="/img/cup_icon.png">
+                        </c:if>
+                      </span>
+                      <c:forEach var="p2SetScore" items="${p2SetScores}">
+                          <span class="ongoingMatch-setArea">
+                              <c:out value="${p2SetScore.value}"/>
+                          </span>
+                      </c:forEach>
+                  </div>
+              </div>
           </div>
-          <div class="second-line">
-            <span class="score"></span>
-            <span class="game">WINNER</span>
-            <span class="set1">SET1</span>
-            <span class="set2">SET2</span>
-            <span class="set3">SET3</span>
-          </div>
-          <div class="third-line">
-            <span class="player2"><c:out value="${P2Name}"/></span>
-            <span class="winner-area">
-              <span class="winner">
-
-
-
-              </span>
-            </span>
-            <span class="game-area">
-              <c:if test="${IsPlayer1Winner == false}">
-                <img src="/img/cup_icon.png">
-              </c:if>
-            </span>
-            <span class="set-area">
-              <c:out value="${P2Set1Score}"/>
-            </span>
-            <span class="set-area">
-              <c:out value="${P2Set2Score}"/>
-            </span>
-            <span class="set-area">
-              <c:out value="${P2Set3Score}"/>
-            </span>
-          </div>
-        </div>
       </div>
-    </div>
+  </div>
+  <div class="body-down">
+      <div class="return-footer-div">
+          <div class="main-page-return"><a href="/">Главная страница</a></div>
+          <footer>icon by <a target="_blank" href="https://icons8.com"> Icons8</a></footer>
+      </div>
+  </div>
   </body>
-
 </html>

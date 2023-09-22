@@ -9,22 +9,25 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Tennis Scoreboard</title>
+    <title>Tennis scoreboard</title>
     <link rel="stylesheet" href="view/styles.css" />
   </head>
   <body>
-  <h1>Табло теннисного матча</h1>
-  <div class="section">
-    <img src="/img/new_match_icon.png">
-    <h2 class="new-match"><a href="/new-match">Новый матч</a></h2>
-  </div>
-
-  <div class="section">
-    <img src="/img/match_list_icon.png">
-    <h2 class="match-list"><a href="">Список завершённых матчей</a></h2>
-  </div>
+    <div class="body-up">
+      <h1>Табло теннисного матча</h1>
+      <div class="index-div">
+        <img src="/img/new_match_icon.png">
+        <h2 class="new-match"><a href="/new-match">Новый матч</a></h2>
+      </div>
+      <div class="index-div">
+        <img src="/img/match_list_icon.png">
+        <h2 class="index-list"><a href="/matches">Список завершённых матчей</a></h2>
+      </div>
+    </div>
+    <div class="body-down">
+      <div class="return-footer-div">
+        <footer>icon by <a target="_blank" href="https://icons8.com"> Icons8</a></footer>
+      </div>
+    </div>
   </body>
-<footer class="main-page-footer">
-  icon by <a target="_blank" href="https://icons8.com"> Icons8</a>
-</footer>
 </html>

@@ -79,7 +79,6 @@ public class CalculationService {
         matchScore.setCurrentSet(matchScore.getCurrentSet() + 1);
     }
 
-
     private boolean checkMatch(int p1MatchScore, int p2MatchScore) {
         boolean isMatchEnded = false;
         if (p1MatchScore == 2) {

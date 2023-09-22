@@ -12,61 +12,59 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>MatchScore</title>
+    <title>Ongoing match</title>
     <link rel="stylesheet" href="view/styles.css" />
   </head>
   <body>
-    <h1>Текущий матч</h1>
-    <div class="score-board-border">
-      <div class="border">
-        <div class="inner-part">
-          <div class="match-id"><h2 class="match-id-text">UUID: <c:out value="${MatchUUID}" /></h2></div>
-          <div class="first-line">
-            <span class="player1"><c:out value="${P1Name}"/></span>
-            <form class="score-up-form" method="post" action="/match-score?uuid=<c:out value="${MatchUUID}" />">
-              <button class="score-up-submit" type="submit" name="scoringPlayerNumber" value="<c:out value="${P1ID}"/>">+</button>
-            </form>
-            <span class="game-area">
-              <c:out value="${P1Score}"/>
-            </span>
-            <span class="set-area">
-              <c:out value="${P1Set1Score}"/>
-            </span>
-            <span class="set-area">
-              <c:out value="${P1Set2Score}"/>
-            </span>
-            <span class="set-area">
-              <c:out value="${P1Set3Score}"/>
-            </span>
+  <div class="body-up">
+      <h1>Текущий матч</h1>
+      <div class="ongoingMatch-scoreboard-base">
+          <div class="ongoingMatch-scoreboard-border">
+              <div class="ongoingMatch-scoreboard-innerPart">
+                  <div class="ongoingMatch-match-id"><h2 class="ongoingMatch-match-id-text">UUID: <c:out value="${ongoingMatch.uuid}" /></h2></div>
+                  <div class="ongoingMatch-first-line">
+                      <span class="ongoingMatch-player"><c:out value="${ongoingMatch.match.player1.name}"/></span>
+                      <form class="ongoingMatch-form" method="post" action="/match-score?uuid=<c:out value="${ongoingMatch.uuid}" />">
+                          <button class="ongoingMatch-submit" type="submit" name="scoringPlayerID" value="<c:out value="${ongoingMatch.match.player1.id}"/>">+</button>
+                      </form>
+                      <span class="ongoingMatch-gameArea">
+                          <c:out value="${ongoingMatch.p1CurrentScore}"/>
+                      </span>
+                      <c:forEach var="p1SetScore" items="${p1SetScores}">
+                          <span class="ongoingMatch-setArea">
+                              <c:out value="${p1SetScore.value}"/>
+                          </span>
+                      </c:forEach>
+                  </div>
+                  <div class="ongoingMatch-second-line">
+                      <span class="ongoingMatch-score">SCORE</span>
+                      <span class="ongoingMatch-game">GAME</span>
+                      <span class="ongoingMatch-set">SET1</span>
+                      <span class="ongoingMatch-set">SET2</span>
+                      <span class="ongoingMatch-set3">SET3</span>
+                  </div>
+                  <div class="ongoingMatch-third-line">
+                      <span class="ongoingMatch-player"><c:out value="${ongoingMatch.match.player2.name}"/></span>
+                      <form class="ongoingMatch-form" method="post" action="/match-score?uuid=<c:out value="${ongoingMatch.uuid}" />">
+                          <button class="ongoingMatch-submit" type="submit" name="scoringPlayerID" value="<c:out value="${ongoingMatch.match.player2.id}"/>">+</button>
+                      </form>
+                      <span class="ongoingMatch-gameArea">
+                          <c:out value="${ongoingMatch.p2CurrentScore}"/>
+                      </span>
+                      <c:forEach var="p2SetScore" items="${p2SetScores}">
+                          <span class="ongoingMatch-setArea">
+                              <c:out value="${p2SetScore.value}"/>
+                          </span>
+                      </c:forEach>
+                  </div>
+              </div>
           </div>
-          <div class="second-line">
-            <span class="score">SCORE</span>
-            <span class="game">GAME</span>
-            <span class="set1">SET1</span>
-            <span class="set2">SET2</span>
-            <span class="set3">SET3</span>
-          </div>
-          <div class="third-line">
-            <span class="player2"><c:out value="${P2Name}"/></span>
-            <form class="score-up-form" method="post" action="/match-score?uuid=<c:out value="${MatchUUID}" />">
-              <button class="score-up-submit" type="submit" name="scoringPlayerNumber" value="<c:out value="${P2ID}"/>">+</button>
-            </form>
-            <span class="game-area">
-              <c:out value="${P2Score}"/>
-            </span>
-            <span class="set-area">
-              <c:out value="${P2Set1Score}"/>
-            </span>
-            <span class="set-area">
-              <c:out value="${P2Set2Score}"/>
-            </span>
-            <span class="set-area">
-              <c:out value="${P2Set3Score}"/>
-            </span>
-          </div>
-        </div>
       </div>
-    </div>
+  </div>
+  <div class="body-down">
+      <div class="return-footer-div">
+          <footer>icon by <a target="_blank" href="https://icons8.com"> Icons8</a></footer>
+      </div>
+  </div>
   </body>
-
 </html>
