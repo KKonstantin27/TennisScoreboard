@@ -8,14 +8,14 @@ import utils.DBUtil;
 import java.util.Optional;
 
 public class PlayerDAO {
-    public Player getByName(String name) {
+    public Optional<Player> getByName(String name) {
         try (Session session = DBUtil.getSessionFactory().openSession()){
             session.beginTransaction();
             Query query = session.createQuery("FROM Player WHERE name = :name");
             query.setParameter("name", name);
             Optional<Player> player = query.uniqueResultOptional();
             session.getTransaction().commit();
-            return player.isEmpty() ? save(name) : player.get();
+            return player;
         }
     }
     public Player save(String name) {

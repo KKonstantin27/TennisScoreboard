@@ -19,8 +19,8 @@ public class CalculationTest {
     @BeforeClass
     public static void createPlayersCalculationService() {
         calculationService = new CalculationService();
-        player1 = playerDAO.getByName("Рафаэль Надаль");
-        player2 = playerDAO.getByName("Роджер Федерер");
+        player1 = playerDAO.getByName("Рафаэль Надаль").get();
+        player2 = playerDAO.getByName("Роджер Федерер").get();
     }
     @Before
     public void initMatchScore(){

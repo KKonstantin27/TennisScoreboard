@@ -1,6 +1,7 @@
 package controllers;
 
 import DAO.PlayerDAO;
+import DTO.MatchDTO;
 import DTO.MatchScoreDTO;
 import models.Match;
 import models.Page;
@@ -34,15 +35,11 @@ public class BaseServlet extends HttpServlet {
         request.setAttribute("p1SetScores", matchScoreDTO.getP1SetScore());
         request.setAttribute("p2SetScores", matchScoreDTO.getP2SetScore());
     }
-    protected void setFinishedMatchAttributes(HttpServletRequest request, HttpServletResponse response, MatchScoreDTO matchScoreDTO, int matchID) {
-        boolean isPlayer1Winner = matchScoreDTO.getMatch().getWinner().getId() == matchScoreDTO.getMatch().getPlayer1().getId();
-        request.setAttribute("MatchID", matchID);
-        request.setAttribute("IsPlayer1Winner", isPlayer1Winner);
-    }
-    protected void setMatchListAttributes(HttpServletRequest request, HttpServletResponse response, List<Match> currentPageMatches, Page page) {
+
+    protected void setMatchListAttributes(HttpServletRequest request, HttpServletResponse response, List<MatchDTO> currentPageMatchesDTO, Page page) {
         request.setAttribute("page", page.getCurrentPage());
         request.setAttribute("lastPage", page.getTotalPages());
-        request.setAttribute("matches", currentPageMatches);
+        request.setAttribute("matches", currentPageMatchesDTO);
     }
 }
 

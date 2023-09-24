@@ -37,7 +37,6 @@ public class MatchScoreServlet extends BaseServlet {
             ongoingMatchesService.removeOngoingMatch(uuid);
             int matchID = finishedMatchesService.saveFinishedMatch(matchScore.getMatch());
             setMatchAttributes(request, response, matchScoreDTO);
-            setFinishedMatchAttributes(request, response, matchScoreDTO, matchID);
             dispatcher.forward(request, response);
         } else {
             response.sendRedirect("/match-score" + "?uuid=" + URLEncoder.encode(uuid.toString(), StandardCharsets.UTF_8));

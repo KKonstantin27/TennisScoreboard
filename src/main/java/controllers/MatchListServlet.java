@@ -1,5 +1,6 @@
 package controllers;
 
+import DTO.MatchDTO;
 import models.Match;
 
 import models.Page;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,13 +29,14 @@ public class MatchListServlet extends BaseServlet{
         if (playerName == null) {
             matches = finishedMatchesService.readFinishedMatches();
         } else {
-            Player player = playerDAO.getByName(playerName.toUpperCase());
+            Player player = playerDAO.getByName(playerName.toUpperCase()).get(); //выброси исключение!!!!!!!!!!!!
             matches = finishedMatchesService.readFinishedMatch(player);
             request.setAttribute("filter_by_player_name", playerName);
         }
-        Page page = new Page(matches, matches.size(), currentPage);
-        List<Match> currentPageMatches = page.getCurrentPageMatches();
-        setMatchListAttributes(request, response, currentPageMatches, page);
+        List<MatchDTO> matchesDTO = mapper.convertToDTO(matches);
+        Page page = new Page(matchesDTO, matches.size(), currentPage);
+        List<MatchDTO> currentPageMatchesDTO = page.getCurrentPageMatches();
+        setMatchListAttributes(request, response, currentPageMatchesDTO, page);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/view/matchList.jsp");
         dispatcher.forward(request, response);
     }

@@ -1,9 +1,12 @@
 package utils;
 
+import DTO.MatchDTO;
 import DTO.MatchScoreDTO;
+import models.Match;
 import models.MatchScore;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Mapper {
     public MatchScoreDTO convertToDTO(MatchScore matchScore) {
@@ -15,6 +18,15 @@ public class Mapper {
             matchScoreDTO.setP2CurrentScore(convertScore(matchScore.getP2CurrentScore(), matchScore.getP1CurrentScore()));
         }
         return matchScoreDTO;
+    }
+
+    public List<MatchDTO> convertToDTO(List<Match> matches) {
+        List<MatchDTO> matchesDTO = new ArrayList<>();
+        for (int i = 0; i < matches.size(); i++) {
+            matchesDTO.add(new MatchDTO(matches.get(i).getId(), matches.get(i).getPlayer1(),
+                    matches.get(i).getPlayer2(), matches.get(i).getWinner()));
+        }
+        return matchesDTO;
     }
 
     private String convertScore(int p1CurrentScore, int p2CurrentScore) {

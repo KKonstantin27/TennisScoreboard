@@ -1,5 +1,6 @@
 package models;
 
+import DTO.MatchDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -12,14 +13,14 @@ public class Page {
     private int totalPages;
     private int currentPage;
     private int currentPageItems;
-    private List<Match> currentPageMatches;
+    private List<MatchDTO> currentPageMatches;
 
-    public Page(List<Match> matches, int totalItems, int currentPage) {
+    public Page(List<MatchDTO> matchesDTO, int totalItems, int currentPage) {
         this.totalItems = totalItems;
         this.currentPage = currentPage;
         double result = (double) totalItems / PAGE_SIZE;
         totalPages = (int) Math.ceil(result) == 0 ? 1 : (int) Math.ceil(result);
         currentPageItems = Math.min(totalItems - ((currentPage - 1) * 5), 5);
-        currentPageMatches = matches.subList((PAGE_SIZE * currentPage) - 5, (Page.PAGE_SIZE * currentPage) - 5 + currentPageItems);
+        currentPageMatches = matchesDTO.subList((PAGE_SIZE * currentPage) - 5, (Page.PAGE_SIZE * currentPage) - 5 + currentPageItems);
     }
 }
