@@ -10,6 +10,7 @@ import services.FinishedMatchesService;
 import services.OngoingMatchesService;
 import utils.DBUtil;
 import utils.Mapper;
+import utils.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +26,7 @@ public class BaseServlet extends HttpServlet {
     protected PlayerDAO playerDAO = new PlayerDAO();
     protected FinishedMatchesService finishedMatchesService = new FinishedMatchesService();
     protected Mapper mapper = new Mapper();
+    protected Validator validator = new Validator();
 
     protected void configUTF(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");

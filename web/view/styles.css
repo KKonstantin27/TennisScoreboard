@@ -136,6 +136,16 @@ a:hover, a:active {
     background-color: rgb(39, 80, 133);
 }
 
+.newMatch-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: azure;
+}
+
 /* ongoingMatch and finished pages */
 
 .ongoingMatch-scoreboard-base {
@@ -211,6 +221,7 @@ a:hover, a:active {
     flex-direction: row;
     text-align: center;
     align-items: center;
+    justify-content: center;
     width: 255px;
     height: 100px;
     font-size: 35px;
@@ -328,7 +339,15 @@ a:hover, a:active {
     height: 70px;
     font-size: 20px;
     font-weight: bold;
+    text-align: center;
     color: azure;
+}
+
+.matchList-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .matchList-filter-form {

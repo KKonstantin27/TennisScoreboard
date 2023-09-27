@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Konstantin
@@ -41,6 +42,11 @@
         </div>
         <div class="newMatch-div"><input class="newMatch-button" type="submit" value="Создать матч" /></div>
       </form>
+      <div class="newMatch-error">
+        <c:if test = "${error != null}">
+            <c:out value="${error}" />
+        </c:if>
+      </div>
     </div>
 
     <div class="body-down">

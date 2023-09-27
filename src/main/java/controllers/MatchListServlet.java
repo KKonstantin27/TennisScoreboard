@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @WebServlet(name = "MatchListServlet", value = "/matches")
@@ -28,10 +28,18 @@ public class MatchListServlet extends BaseServlet{
         List<Match> matches;
         if (playerName == null) {
             matches = finishedMatchesService.readFinishedMatches();
+        } else if (validator.isValidUserInput(playerName)) {
+            Optional<Player> playerOPT = playerDAO.getByName(playerName.toUpperCase());
+            if (playerOPT.isEmpty()) {
+                request.setAttribute("error", "Игрок отсутствует в БД");
+                matches = finishedMatchesService.readFinishedMatches();
+            } else {
+                matches = finishedMatchesService.readFinishedMatch(playerOPT.get());
+                request.setAttribute("filter_by_player_name", playerName);
+            }
         } else {
-            Player player = playerDAO.getByName(playerName.toUpperCase()).get(); //выброси исключение!!!!!!!!!!!!
-            matches = finishedMatchesService.readFinishedMatch(player);
-            request.setAttribute("filter_by_player_name", playerName);
+            matches = finishedMatchesService.readFinishedMatches();
+            request.setAttribute("error", "Некорректный формат имени игрока");
         }
         List<MatchDTO> matchesDTO = mapper.convertToDTO(matches);
         Page page = new Page(matchesDTO, matches.size(), currentPage);

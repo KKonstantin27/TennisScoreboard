@@ -26,10 +26,15 @@ public class NewMatchServlet extends BaseServlet {
         configUTF(request, response);
         String player1Name = request.getParameter("first-player-name");
         String player2Name = request.getParameter("second-player-name");
-        Optional<Player> player1Opt = playerDAO.getByName(player1Name);
-        Optional<Player> player2Opt = playerDAO.getByName(player2Name);
-        Player player1 = player1Opt.isEmpty() ? playerDAO.save(player1Name) : player1Opt.get();
-        Player player2 = player2Opt.isEmpty() ? playerDAO.save(player2Name) : player2Opt.get();
+        if (!validator.isValidUserInput(player1Name) || !validator.isValidUserInput(player2Name)) {
+            request.setAttribute("error", "Некорректный формат имени игрока");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/view/newMatch.jsp");
+            dispatcher.forward(request, response);
+        }
+        Optional<Player> player1Opt = playerDAO.getByName(player1Name.toUpperCase());
+        Optional<Player> player2Opt = playerDAO.getByName(player2Name.toUpperCase());
+        Player player1 = player1Opt.isEmpty() ? playerDAO.save(player1Name.toUpperCase()) : player1Opt.get();
+        Player player2 = player2Opt.isEmpty() ? playerDAO.save(player2Name.toUpperCase()) : player2Opt.get();
         String currentMatchUUID = ongoingMatchesService.createOngoingMatch(player1, player2);
         response.sendRedirect("/match-score" + "?uuid=" + URLEncoder.encode(currentMatchUUID, StandardCharsets.UTF_8));
     }

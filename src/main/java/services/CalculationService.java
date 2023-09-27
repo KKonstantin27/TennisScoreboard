@@ -2,25 +2,18 @@ package services;
 
 import models.Match;
 import models.MatchScore;
-
 import java.util.UUID;
 
 public class CalculationService {
     private MatchScore matchScore;
     private int scoringPlayer;
-    private int currentSet;
-
-
 
     public MatchScore calculate(int id, MatchScore matchScore, UUID uuid) {
         this.matchScore = matchScore;
-        currentSet = matchScore.getCurrentSet();
         defineScoringPlayer(id);
         plusScore();
         if (matchScore.isTieBreak()) {
-            if (checkTieBreak(matchScore.getP1CurrentScore(), matchScore.getP2CurrentScore())) {
-                return matchScore;
-            }
+            if (checkTieBreak(matchScore.getP1CurrentScore(), matchScore.getP2CurrentScore())) {return matchScore;}
         }
         if (checkGame(matchScore.getP1CurrentScore(), matchScore.getP2CurrentScore())) {return matchScore;}
         plusGame();
@@ -56,8 +49,7 @@ public class CalculationService {
         } else {
             matchScore.setP2CurrentSetScore(matchScore.getP2CurrentSetScore() + 1);
         }
-        matchScore.setP1CurrentScore(0);
-        matchScore.setP2CurrentScore(0);
+        resetCurrentScore();
     }
     private boolean checkSet(int p1CurrentSetScore, int p2CurrentSetScore) {
         boolean isSetContinues= true;
@@ -92,8 +84,7 @@ public class CalculationService {
     }
     private void startTieBreak() {
         matchScore.setTieBreak(true);
-        matchScore.setP1CurrentScore(0);
-        matchScore.setP2CurrentScore(0);
+        resetCurrentScore();
     }
     private boolean checkTieBreak(int p1CurrentScore, int p2CurrentScore) {
         boolean isTieBreakContinues = true;
@@ -104,9 +95,15 @@ public class CalculationService {
         }
         return isTieBreakContinues;
     }
+
+    private void resetCurrentScore() {
+        matchScore.setP1CurrentScore(0);
+        matchScore.setP2CurrentScore(0);
+    }
     private void defineScoringPlayer(int id) {
         scoringPlayer = id == matchScore.getMatch().getPlayer1().getId() ? 1 : 2;
     }
+
     private void setMatchWinner() {
         if (scoringPlayer == 1) {
             matchScore.getMatch().setWinner(matchScore.getMatch().getPlayer1());

@@ -29,6 +29,11 @@
           </div>
         </div>
         <div class="matchList-filter">
+          <c:if test = "${error != null}">
+            <div class="matchList-error">
+              <c:out value="${error}" />
+            </div>
+          </c:if>
           <c:if test = "${filter_by_player_name != null}">
             <c:out value="${filter_by_player_name}" />
             <form class="matchList-filter-form" method="get" action="/matches">
