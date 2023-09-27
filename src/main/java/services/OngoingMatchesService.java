@@ -4,8 +4,6 @@ import models.Match;
 import models.MatchScore;
 import models.Player;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,14 +15,18 @@ public class OngoingMatchesService {
         Match ongoingMatch = new Match(player1, player2);
         return addOngoingMatch(ongoingMatch);
     }
+
     private String addOngoingMatch(Match ongoingMatch) {
         UUID uuid = UUID.randomUUID();
         ongoingMatches.put(uuid, new MatchScore(ongoingMatch, uuid));
         return uuid.toString();
     }
 
-    public MatchScore getOngoingMatch (UUID uuid) {
+    public MatchScore getOngoingMatch(UUID uuid) {
         return ongoingMatches.get(uuid);
     }
-    public void removeOngoingMatch (UUID uuid) {ongoingMatches.remove(uuid); }
+
+    public void removeOngoingMatch(UUID uuid) {
+        ongoingMatches.remove(uuid);
+    }
 }

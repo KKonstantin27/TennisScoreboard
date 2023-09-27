@@ -15,10 +15,10 @@ public class MatchScore {
     private Map<Integer, Integer> p2SetScore;
     private int p1MatchScore;
     private int p2MatchScore;
-    private boolean TieBreak;
-    private boolean MatchEnded;
+    private boolean tieBreak;
+    private boolean matchEnded;
 
-    public MatchScore (Match match, UUID uuid) {
+    public MatchScore(Match match, UUID uuid) {
         this.match = match;
         this.uuid = uuid;
         this.currentSet = 1;
@@ -28,8 +28,8 @@ public class MatchScore {
         this.p2SetScore = fillStartValues();
         this.p1MatchScore = 0;
         this.p2MatchScore = 0;
-        this.TieBreak = false;
-        this.MatchEnded = false;
+        this.tieBreak = false;
+        this.matchEnded = false;
     }
 
     private Map<Integer, Integer> fillStartValues() {
@@ -43,15 +43,19 @@ public class MatchScore {
     public int getP1CurrentSetScore() {
         return p1SetScore.get(currentSet);
     }
+
     public int getP2CurrentSetScore() {
         return p2SetScore.get(currentSet);
     }
+
     public void setP1CurrentSetScore(int p1CurrentSetScore) {
         p1SetScore.put(currentSet, p1CurrentSetScore);
     }
+
     public void setP2CurrentSetScore(int p2CurrentSetScore) {
         p2SetScore.put(currentSet, p2CurrentSetScore);
     }
+
     public void setWinner(Player player) {
         match.setWinner(player);
     }

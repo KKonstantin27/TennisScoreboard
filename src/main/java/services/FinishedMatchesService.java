@@ -10,12 +10,13 @@ public class FinishedMatchesService {
     private MatchDAO matchDAO = new MatchDAO();
 
     public int saveFinishedMatch(Match match) {
-        int id = matchDAO.save(match);
-        return id;
+        return matchDAO.save(match);
     }
+
     public List<Match> readFinishedMatches() {
         return matchDAO.getAll();
     }
+
     public List<Match> readFinishedMatch(Player player) {
         return matchDAO.getByPlayer(player);
     }

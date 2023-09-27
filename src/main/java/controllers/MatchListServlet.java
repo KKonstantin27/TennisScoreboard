@@ -2,7 +2,6 @@ package controllers;
 
 import DTO.MatchDTO;
 import models.Match;
-
 import models.Page;
 import models.Player;
 
@@ -19,7 +18,7 @@ import java.util.Optional;
 
 
 @WebServlet(name = "MatchListServlet", value = "/matches")
-public class MatchListServlet extends BaseServlet{
+public class MatchListServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         configUTF(request, response);
@@ -34,12 +33,12 @@ public class MatchListServlet extends BaseServlet{
                 request.setAttribute("error", "Игрок отсутствует в БД");
                 matches = finishedMatchesService.readFinishedMatches();
             } else {
-                matches = finishedMatchesService.readFinishedMatch(playerOPT.get());
                 request.setAttribute("filter_by_player_name", playerName);
+                matches = finishedMatchesService.readFinishedMatch(playerOPT.get());
             }
         } else {
-            matches = finishedMatchesService.readFinishedMatches();
             request.setAttribute("error", "Некорректный формат имени игрока");
+            matches = finishedMatchesService.readFinishedMatches();
         }
         List<MatchDTO> matchesDTO = mapper.convertToDTO(matches);
         Page page = new Page(matchesDTO, matches.size(), currentPage);
@@ -48,6 +47,7 @@ public class MatchListServlet extends BaseServlet{
         RequestDispatcher dispatcher = request.getRequestDispatcher("/view/matchList.jsp");
         dispatcher.forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         configUTF(request, response);

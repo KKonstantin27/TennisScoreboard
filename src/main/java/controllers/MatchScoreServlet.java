@@ -3,7 +3,6 @@ package controllers;
 import DTO.MatchScoreDTO;
 import models.MatchScore;
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,19 +23,20 @@ public class MatchScoreServlet extends BaseServlet {
         setMatchAttributes(request, response, mapper.convertToDTO(matchScore));
         dispatcher.forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         configUTF(request, response);
-        int scoringPlayerNumber = Integer.parseInt(request.getParameter("scoringPlayerID"));
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/finishedMatch.jsp");
-        UUID uuid = UUID.fromString(request.getParameter("uuid").toString());
+        int scoringPlayerID = Integer.parseInt(request.getParameter("scoringPlayerID"));
+        UUID uuid = UUID.fromString(request.getParameter("uuid"));
         MatchScore matchScore = ongoingMatchesService.getOngoingMatch(uuid);
-        matchScore = calculationService.calculate(scoringPlayerNumber, matchScore, uuid);
+        matchScore = calculationService.calculate(scoringPlayerID, matchScore);
         MatchScoreDTO matchScoreDTO = mapper.convertToDTO(matchScore);
         if (matchScore.isMatchEnded()) {
             ongoingMatchesService.removeOngoingMatch(uuid);
             int matchID = finishedMatchesService.saveFinishedMatch(matchScore.getMatch());
             setMatchAttributes(request, response, matchScoreDTO);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/view/finishedMatch.jsp");
             dispatcher.forward(request, response);
         } else {
             response.sendRedirect("/match-score" + "?uuid=" + URLEncoder.encode(uuid.toString(), StandardCharsets.UTF_8));

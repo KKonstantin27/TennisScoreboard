@@ -21,6 +21,7 @@ public class NewMatchServlet extends BaseServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/view/newMatch.jsp");
         dispatcher.forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         configUTF(request, response);
@@ -28,6 +29,10 @@ public class NewMatchServlet extends BaseServlet {
         String player2Name = request.getParameter("second-player-name");
         if (!validator.isValidUserInput(player1Name) || !validator.isValidUserInput(player2Name)) {
             request.setAttribute("error", "Некорректный формат имени игрока");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/view/newMatch.jsp");
+            dispatcher.forward(request, response);
+        } else if (player1Name.equalsIgnoreCase(player2Name)) {
+            request.setAttribute("error", "Необходимо указать разных игроков");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/view/newMatch.jsp");
             dispatcher.forward(request, response);
         }
@@ -38,4 +43,6 @@ public class NewMatchServlet extends BaseServlet {
         String currentMatchUUID = ongoingMatchesService.createOngoingMatch(player1, player2);
         response.sendRedirect("/match-score" + "?uuid=" + URLEncoder.encode(currentMatchUUID, StandardCharsets.UTF_8));
     }
+
+
 }

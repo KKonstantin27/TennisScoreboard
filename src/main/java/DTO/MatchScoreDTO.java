@@ -16,4 +16,5 @@ public class MatchScoreDTO {
     private String p2CurrentScore;
     private Map<Integer, Integer> p1SetScore;
     private Map<Integer, Integer> p2SetScore;
+    private boolean tieBreak;
 }

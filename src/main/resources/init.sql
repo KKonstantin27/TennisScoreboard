@@ -25,15 +25,10 @@ INSERT INTO Matches (Player1, Player2, Winner) VALUES (4, 6, 4);
 INSERT INTO Matches (Player1, Player2, Winner) VALUES (3, 4, 3);
 INSERT INTO Matches (Player1, Player2, Winner) VALUES (3, 5, 3);
 INSERT INTO Matches (Player1, Player2, Winner) VALUES (3, 7, 3);
-INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 3, 2);
-INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 3, 2);
-INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 3, 2);
-INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 3, 2);
-INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 3, 2);
-INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 3, 2);
-INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 3, 2);
-INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 3, 2);
-INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 3, 2);
-INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 3, 2);
-INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 3, 2);
+INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 7, 2);
+INSERT INTO Matches (Player1, Player2, Winner) VALUES (2, 5, 2);
+INSERT INTO Matches (Player1, Player2, Winner) VALUES (6, 2, 2);
+INSERT INTO Matches (Player1, Player2, Winner) VALUES (9, 3, 3);
+INSERT INTO Matches (Player1, Player2, Winner) VALUES (1, 3, 1);
+
 
