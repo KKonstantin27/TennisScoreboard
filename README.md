@@ -5,7 +5,7 @@ https://zhukovsd.github.io/java-backend-learning-course/Projects/TennisScoreboar
 Приложение доступно по адресу: <br>
 http://62.109.17.145:8080/TennisScoreboard-1.0/ 
 
-<h2>Используемые версии: </h2>
+<h2>Используемые версии </h2>
 <ul>
     <li>JDK 17</li>
     <li>Tomcat 9.0.78</li>
