@@ -16,12 +16,12 @@
     <div class="body-up">
       <h1>Табло теннисного матча</h1>
       <div class="index-div">
-        <img src="/img/new_match_icon.png">
-        <h2 class="new-match"><a href="/new-match">Новый матч</a></h2>
+        <img src="${pageContext.request.contextPath}/img/new_match_icon.png">
+        <h2 class="new-match"><a href="${pageContext.request.contextPath}/new-match">Новый матч</a></h2>
       </div>
       <div class="index-div">
-        <img src="/img/match_list_icon.png">
-        <h2 class="index-list"><a href="/matches">Список завершённых матчей</a></h2>
+        <img src="${pageContext.request.contextPath}/img/match_list_icon.png">
+        <h2 class="index-list"><a href="${pageContext.request.contextPath}/matches">Список завершённых матчей</a></h2>
       </div>
     </div>
     <div class="body-down">

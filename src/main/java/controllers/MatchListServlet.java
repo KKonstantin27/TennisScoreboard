@@ -55,9 +55,9 @@ public class MatchListServlet extends BaseServlet {
         String playerName = request.getParameter("filter_by_player_name");
         String url;
         if (playerName == null) {
-            url = "/matches" + "?page=" + URLEncoder.encode(currentPage, StandardCharsets.UTF_8);
+            url = request.getContextPath() + "/matches" + "?page=" + URLEncoder.encode(currentPage, StandardCharsets.UTF_8);
         } else {
-            url = "/matches" + "?page=" + URLEncoder.encode(currentPage, StandardCharsets.UTF_8)
+            url = request.getContextPath() + "/matches" + "?page=" + URLEncoder.encode(currentPage, StandardCharsets.UTF_8)
                     + "&filter_by_player_name=" + URLEncoder.encode(playerName, StandardCharsets.UTF_8);
         }
         response.sendRedirect(url);

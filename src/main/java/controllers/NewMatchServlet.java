@@ -41,7 +41,7 @@ public class NewMatchServlet extends BaseServlet {
         Player player1 = player1Opt.isEmpty() ? playerDAO.save(player1Name.toUpperCase()) : player1Opt.get();
         Player player2 = player2Opt.isEmpty() ? playerDAO.save(player2Name.toUpperCase()) : player2Opt.get();
         String currentMatchUUID = ongoingMatchesService.createOngoingMatch(player1, player2);
-        response.sendRedirect("/match-score" + "?uuid=" + URLEncoder.encode(currentMatchUUID, StandardCharsets.UTF_8));
+        response.sendRedirect(request.getContextPath() + "/match-score" + "?uuid=" + URLEncoder.encode(currentMatchUUID, StandardCharsets.UTF_8));
     }
 
 

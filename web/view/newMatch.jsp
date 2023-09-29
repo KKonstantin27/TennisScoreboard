@@ -16,10 +16,10 @@
   <body>
     <div class="body-up">
       <h1>Новый матч</h1>
-      <form class="newMatch-form" method="post" action="/new-match">
+      <form class="newMatch-form" method="post" action="${pageContext.request.contextPath}/new-match">
         <div class="newMatch-div">
           <div class="newMatch-icon">
-            <img src="/img/p1_icon.png">
+            <img src="${pageContext.request.contextPath}/img/p1_icon.png">
           </div>
           <div class="newMatch-inner-div">
             <label for="first-player-name">
@@ -31,11 +31,11 @@
 
         <div class="newMatch-div">
           <div class="newMatch-icon">
-            <img src="/img/p2_icon.png">
+            <img src="${pageContext.request.contextPath}/img/p2_icon.png">
           </div>
           <div class="newMatch-inner-div">
             <label for="second-player-name">
-              <h2 class="newMatch-text">Имя первого игрока</h2>
+              <h2 class="newMatch-text">Имя второго игрока</h2>
               <input class="newMatch-input" id="second-player-name" name="second-player-name" type="text" required placeholder="РАФАЭЛЬ НАДАЛЬ"/>
             </label>
           </div>
@@ -51,7 +51,7 @@
 
     <div class="body-down">
       <div class="return-footer-div">
-        <div class="main-page-return"><a href="/">Главная страница</a></div>
+        <div class="main-page-return"><a href="${pageContext.request.contextPath}/">Главная страница</a></div>
         <footer>icon by <a target="_blank" href="https://icons8.com"> Icons8</a></footer>
       </div>
     </div>

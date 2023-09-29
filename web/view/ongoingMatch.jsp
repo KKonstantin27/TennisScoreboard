@@ -24,7 +24,7 @@
                   <div class="ongoingMatch-match-id"><h2 class="ongoingMatch-match-id-text">UUID: <c:out value="${ongoingMatch.uuid}" /></h2></div>
                   <div class="ongoingMatch-first-line">
                       <span class="ongoingMatch-player"><c:out value="${ongoingMatch.match.player1.name}"/></span>
-                      <form class="ongoingMatch-form" method="post" action="/match-score?uuid=<c:out value="${ongoingMatch.uuid}" />">
+                      <form class="ongoingMatch-form" method="post" action="${pageContext.request.contextPath}/match-score?uuid=<c:out value="${ongoingMatch.uuid}" />">
                           <button class="ongoingMatch-submit" type="submit" name="scoringPlayerID" value="<c:out value="${ongoingMatch.match.player1.id}"/>">+</button>
                       </form>
                       <span class="ongoingMatch-gameArea">
@@ -38,14 +38,17 @@
                   </div>
                   <div class="ongoingMatch-second-line">
                       <span class="ongoingMatch-score">SCORE</span>
-                      <span class="ongoingMatch-game">GAME</span>
+                      <span class="ongoingMatch-game">
+                          <c:if test = "${ongoingMatch.tieBreak == true}">TIEBREAK</c:if>
+                          <c:if test = "${ongoingMatch.tieBreak == false}">GAME</c:if>
+                      </span>
                       <span class="ongoingMatch-set">SET1</span>
                       <span class="ongoingMatch-set">SET2</span>
                       <span class="ongoingMatch-set3">SET3</span>
                   </div>
                   <div class="ongoingMatch-third-line">
                       <span class="ongoingMatch-player"><c:out value="${ongoingMatch.match.player2.name}"/></span>
-                      <form class="ongoingMatch-form" method="post" action="/match-score?uuid=<c:out value="${ongoingMatch.uuid}" />">
+                      <form class="ongoingMatch-form" method="post" action="${pageContext.request.contextPath}/match-score?uuid=<c:out value="${ongoingMatch.uuid}" />">
                           <button class="ongoingMatch-submit" type="submit" name="scoringPlayerID" value="<c:out value="${ongoingMatch.match.player2.id}"/>">+</button>
                       </form>
                       <span class="ongoingMatch-gameArea">

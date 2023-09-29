@@ -6,10 +6,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class DBUtil {
     private static SessionFactory sessionFactory;
@@ -29,12 +30,13 @@ public class DBUtil {
 
     public static void initDB() {
         getSessionFactory();
-        Path path = Path.of("C:\\Users\\Konstantin\\Desktop\\Projects\\TennisScoreboard\\src\\main\\resources\\init.sql");
-        try (Session session = sessionFactory.openSession()) {
-            List<String> sqlQueries = Files.readAllLines(path);
+        try (InputStream inputStream = DBUtil.class.getResourceAsStream("/init.sql");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+             Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            for (String sqlQuery : sqlQueries) {
-                session.createNativeQuery(sqlQuery).executeUpdate();
+            String query;
+            while (((query = reader.readLine()) != null)) {
+                session.createNativeQuery(query).executeUpdate();
             }
             session.getTransaction().commit();
         } catch (IOException e) {

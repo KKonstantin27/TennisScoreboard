@@ -39,7 +39,7 @@ public class MatchScoreServlet extends BaseServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/view/finishedMatch.jsp");
             dispatcher.forward(request, response);
         } else {
-            response.sendRedirect("/match-score" + "?uuid=" + URLEncoder.encode(uuid.toString(), StandardCharsets.UTF_8));
+            response.sendRedirect(request.getContextPath() + "/match-score" + "?uuid=" + URLEncoder.encode(uuid.toString(), StandardCharsets.UTF_8));
         }
     }
 }

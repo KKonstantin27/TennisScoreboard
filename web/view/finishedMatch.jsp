@@ -29,7 +29,7 @@
                       </span>
                       <span class="ongoingMatch-gameArea">
                         <c:if test="${ongoingMatch.match.player1 == ongoingMatch.match.winner}">
-                            <img src="/img/cup_icon.png">
+                            <img src="${pageContext.request.contextPath}/img/cup_icon.png">
                         </c:if>
                       </span>
                       <c:forEach var="p1SetScore" items="${p1SetScores}">
@@ -52,7 +52,7 @@
                       </span>
                       <span class="ongoingMatch-gameArea">
                         <c:if test="${ongoingMatch.match.player2 == ongoingMatch.match.winner}">
-                            <img src="/img/cup_icon.png">
+                            <img src="${pageContext.request.contextPath}/img/cup_icon.png">
                         </c:if>
                       </span>
                       <c:forEach var="p2SetScore" items="${p2SetScores}">
@@ -67,7 +67,7 @@
   </div>
   <div class="body-down">
       <div class="return-footer-div">
-          <div class="main-page-return"><a href="/">Главная страница</a></div>
+          <div class="main-page-return"><a href="${pageContext.request.contextPath}/">Главная страница</a></div>
           <footer>icon by <a target="_blank" href="https://icons8.com"> Icons8</a></footer>
       </div>
   </div>
