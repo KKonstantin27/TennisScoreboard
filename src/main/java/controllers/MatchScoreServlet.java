@@ -30,6 +30,11 @@ public class MatchScoreServlet extends BaseServlet {
         int scoringPlayerID = Integer.parseInt(request.getParameter("scoringPlayerID"));
         UUID uuid = UUID.fromString(request.getParameter("uuid"));
         MatchScore matchScore = ongoingMatchesService.getOngoingMatch(uuid);
+        System.out.println(matchScore);
+        if (matchScore == null) {
+            response.sendRedirect(request.getContextPath() + "/main-page-redirect");
+            return;
+        }
         matchScore = calculationService.calculate(scoringPlayerID, matchScore);
         MatchScoreDTO matchScoreDTO = mapper.convertToDTO(matchScore);
         if (matchScore.isMatchEnded()) {

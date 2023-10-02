@@ -1,13 +1,5 @@
-<%@ page import="models.Player" %>
-<%@ page import="java.lang.String" %>
-<%@ page import="DTO.MatchScoreDTO" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%--
-  Created by IntelliJ IDEA.
-  User: Konstantin
-  Date: 07.09.2023
-  Time: 10:05
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>

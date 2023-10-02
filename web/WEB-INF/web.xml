@@ -3,13 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    
-<!--    <servlet>-->
-<!--        <servlet-name>NewMatchServlet</servlet-name>-->
-<!--        <jsp-file>/newMatch.jsp</jsp-file>-->
-<!--    </servlet>-->
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>NewMatchServlet</servlet-name>-->
-<!--        <url-pattern>/new-match</url-pattern>-->
-<!--    </servlet-mapping>-->
+    <servlet>
+        <servlet-name>mainPageRedirect</servlet-name>
+        <jsp-file>/view/mainPageRedirect.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mainPageRedirect</servlet-name>
+        <url-pattern>/main-page-redirect</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -227,7 +227,6 @@ a:hover, a:active {
     font-size: 35px;
     font-weight: bold;
     color: azure;
-    /*background-color: #05282f;*/
 }
 .ongoingMatch-form {
     display: flex;
@@ -261,6 +260,11 @@ a:hover, a:active {
     border-color: #05282f;
 }
 
+.ongoingMatch-submit:active {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .finishedMatch-insteadButton {
     display: flex;
     justify-content: center;
@@ -270,7 +274,6 @@ a:hover, a:active {
     margin: 20px;
     background-color: #264c59;
 }
-
 
 .ongoingMatch-gameArea {
     display: flex;
@@ -320,6 +323,11 @@ a:hover, a:active {
 
 .ongoingMatch-set3 {
     margin-right: 30px;
+}
+
+.main-page-redirect-return {
+    display: flex;
+    align-items: center;
 }
 
 /* matchList page */
@@ -537,25 +545,3 @@ a:hover, a:active {
     background-color: rgb(39, 80, 133);
 }
 
-
-
-
-
-
-
-
-
-
-
-/*.match-list-name {*/
-/*    display: flex;*/
-/*    width: 295px;*/
-/*}*/
-
-/*input {*/
-/*    display: block;*/
-/*    width: 80%;*/
-/*    margin: auto;*/
-/*    height: 2em;*/
-/*    size: 10px;*/
-/*}*/
