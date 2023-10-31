@@ -17,7 +17,6 @@ import java.util.UUID;
 public class MatchScoreServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        configUTF(request, response);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/view/ongoingMatch.jsp");
         MatchScore matchScore = ongoingMatchesService.getOngoingMatch(UUID.fromString(request.getParameter("uuid")));
         setMatchAttributes(request, response, mapper.convertToDTO(matchScore));
@@ -26,7 +25,6 @@ public class MatchScoreServlet extends BaseServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        configUTF(request, response);
         int scoringPlayerID = Integer.parseInt(request.getParameter("scoringPlayerID"));
         UUID uuid = UUID.fromString(request.getParameter("uuid"));
         MatchScore matchScore = ongoingMatchesService.getOngoingMatch(uuid);
