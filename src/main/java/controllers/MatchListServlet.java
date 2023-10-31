@@ -21,7 +21,6 @@ import java.util.Optional;
 public class MatchListServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        configUTF(request, response);
         int currentPage = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
         String playerName = request.getParameter("filter_by_player_name");
         List<Match> matches;
@@ -31,6 +30,7 @@ public class MatchListServlet extends BaseServlet {
             Optional<Player> playerOPT = playerDAO.getByName(playerName.toUpperCase());
             if (playerOPT.isEmpty()) {
                 request.setAttribute("error", "Игрок отсутствует в БД");
+                response.setStatus(404);
                 matches = finishedMatchesService.readFinishedMatches();
             } else {
                 request.setAttribute("filter_by_player_name", playerName);
@@ -38,6 +38,7 @@ public class MatchListServlet extends BaseServlet {
             }
         } else {
             request.setAttribute("error", "Некорректный формат имени игрока");
+            response.setStatus(400);
             matches = finishedMatchesService.readFinishedMatches();
         }
         List<MatchDTO> matchesDTO = mapper.convertToDTO(matches);
@@ -50,7 +51,6 @@ public class MatchListServlet extends BaseServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        configUTF(request, response);
         String currentPage = request.getParameter("page") == null ? "1" : request.getParameter("page");
         String playerName = request.getParameter("filter_by_player_name");
         String url;

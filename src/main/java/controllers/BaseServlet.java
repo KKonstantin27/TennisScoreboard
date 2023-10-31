@@ -25,11 +25,6 @@ public class BaseServlet extends HttpServlet {
     protected Mapper mapper = new Mapper();
     protected Validator validator = new Validator();
 
-    protected void configUTF(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-    }
-
     protected void setMatchAttributes(HttpServletRequest request, HttpServletResponse response, MatchScoreDTO matchScoreDTO) {
         request.setAttribute("ongoingMatch", matchScoreDTO);
         request.setAttribute("p1SetScores", matchScoreDTO.getP1SetScore());
