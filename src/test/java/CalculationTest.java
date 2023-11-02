@@ -2,10 +2,10 @@ import DAO.PlayerDAO;
 import models.Match;
 import models.MatchScore;
 import models.Player;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import services.CalculationService;
 
 import java.util.Optional;
@@ -18,7 +18,7 @@ public class CalculationTest {
     private static Player player2;
     private MatchScore matchScore;
 
-    @BeforeClass
+    @BeforeAll
     public static void createPlayersCalculationService() {
         calculationService = new CalculationService();
         Optional<Player> player1Opt = playerDAO.getByName("РОДЖЕР ФЕДЕРЕР");
@@ -27,7 +27,7 @@ public class CalculationTest {
         player2 = player2Opt.isEmpty() ? playerDAO.save("РАФАЭЛЬ НАДАЛЬ") : player2Opt.get();
     }
 
-    @Before
+    @BeforeEach
     public void initMatchScore() {
         Match match = new Match(player1, player2);
         UUID uuid = UUID.randomUUID();
@@ -38,18 +38,18 @@ public class CalculationTest {
     public void scoringP1PlusSetScoreGame_0() {
         matchScore.setP1CurrentScore(3);
         calculationService.calculate(1, matchScore);
-        Assert.assertEquals(1, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
     public void scoringP2PlusSetScore0_Game() {
         matchScore.setP2CurrentScore(3);
         calculationService.calculate(2, matchScore);
-        Assert.assertEquals(1, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -57,9 +57,9 @@ public class CalculationTest {
         matchScore.setP1CurrentScore(3);
         matchScore.setP2CurrentScore(2);
         calculationService.calculate(1, matchScore);
-        Assert.assertEquals(1, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -67,9 +67,9 @@ public class CalculationTest {
         matchScore.setP1CurrentScore(2);
         matchScore.setP2CurrentScore(3);
         calculationService.calculate(2, matchScore);
-        Assert.assertEquals(1, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -77,9 +77,9 @@ public class CalculationTest {
         matchScore.setP1CurrentScore(3);
         matchScore.setP2CurrentScore(3);
         calculationService.calculate(1, matchScore);
-        Assert.assertEquals(0, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(4, matchScore.getP1CurrentScore());
-        Assert.assertEquals(3, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(4, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(3, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -87,9 +87,9 @@ public class CalculationTest {
         matchScore.setP1CurrentScore(3);
         matchScore.setP2CurrentScore(3);
         calculationService.calculate(2, matchScore);
-        Assert.assertEquals(0, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(3, matchScore.getP1CurrentScore());
-        Assert.assertEquals(4, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(3, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(4, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -97,9 +97,9 @@ public class CalculationTest {
         matchScore.setP1CurrentScore(4);
         matchScore.setP2CurrentScore(3);
         calculationService.calculate(1, matchScore);
-        Assert.assertEquals(1, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -107,9 +107,9 @@ public class CalculationTest {
         matchScore.setP1CurrentScore(3);
         matchScore.setP2CurrentScore(4);
         calculationService.calculate(2, matchScore);
-        Assert.assertEquals(1, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -117,12 +117,12 @@ public class CalculationTest {
         matchScore.setP1CurrentScore(3);
         matchScore.setP1CurrentSetScore(5);
         calculationService.calculate(1, matchScore);
-        Assert.assertEquals(1, matchScore.getP1MatchScore());
-        Assert.assertEquals(2, matchScore.getCurrentSet());
-        Assert.assertEquals(0, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP1MatchScore());
+        Assertions.assertEquals(2, matchScore.getCurrentSet());
+        Assertions.assertEquals(0, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -130,12 +130,12 @@ public class CalculationTest {
         matchScore.setP2CurrentScore(3);
         matchScore.setP2CurrentSetScore(5);
         calculationService.calculate(2, matchScore);
-        Assert.assertEquals(1, matchScore.getP2MatchScore());
-        Assert.assertEquals(2, matchScore.getCurrentSet());
-        Assert.assertEquals(0, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP2MatchScore());
+        Assertions.assertEquals(2, matchScore.getCurrentSet());
+        Assertions.assertEquals(0, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -144,12 +144,12 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(5);
         matchScore.setP2CurrentSetScore(4);
         calculationService.calculate(1, matchScore);
-        Assert.assertEquals(1, matchScore.getP1MatchScore());
-        Assert.assertEquals(2, matchScore.getCurrentSet());
-        Assert.assertEquals(0, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP1MatchScore());
+        Assertions.assertEquals(2, matchScore.getCurrentSet());
+        Assertions.assertEquals(0, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -158,12 +158,12 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(4);
         matchScore.setP2CurrentSetScore(5);
         calculationService.calculate(2, matchScore);
-        Assert.assertEquals(1, matchScore.getP2MatchScore());
-        Assert.assertEquals(2, matchScore.getCurrentSet());
-        Assert.assertEquals(0, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP2MatchScore());
+        Assertions.assertEquals(2, matchScore.getCurrentSet());
+        Assertions.assertEquals(0, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
 
@@ -173,12 +173,12 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(6);
         matchScore.setP2CurrentSetScore(5);
         calculationService.calculate(1, matchScore);
-        Assert.assertEquals(1, matchScore.getP1MatchScore());
-        Assert.assertEquals(2, matchScore.getCurrentSet());
-        Assert.assertEquals(0, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP1MatchScore());
+        Assertions.assertEquals(2, matchScore.getCurrentSet());
+        Assertions.assertEquals(0, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -187,12 +187,12 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(5);
         matchScore.setP2CurrentSetScore(6);
         calculationService.calculate(2, matchScore);
-        Assert.assertEquals(1, matchScore.getP2MatchScore());
-        Assert.assertEquals(2, matchScore.getCurrentSet());
-        Assert.assertEquals(0, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP2MatchScore());
+        Assertions.assertEquals(2, matchScore.getCurrentSet());
+        Assertions.assertEquals(0, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -201,13 +201,13 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(5);
         matchScore.setP2CurrentSetScore(6);
         calculationService.calculate(1, matchScore);
-        Assert.assertTrue(matchScore.isTieBreak());
-        Assert.assertEquals(0, matchScore.getP1MatchScore());
-        Assert.assertEquals(1, matchScore.getCurrentSet());
-        Assert.assertEquals(6, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(6, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertTrue(matchScore.isTieBreak());
+        Assertions.assertEquals(0, matchScore.getP1MatchScore());
+        Assertions.assertEquals(1, matchScore.getCurrentSet());
+        Assertions.assertEquals(6, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(6, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -216,13 +216,13 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(6);
         matchScore.setP2CurrentSetScore(5);
         calculationService.calculate(2, matchScore);
-        Assert.assertTrue(matchScore.isTieBreak());
-        Assert.assertEquals(0, matchScore.getP2MatchScore());
-        Assert.assertEquals(1, matchScore.getCurrentSet());
-        Assert.assertEquals(6, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(6, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertTrue(matchScore.isTieBreak());
+        Assertions.assertEquals(0, matchScore.getP2MatchScore());
+        Assertions.assertEquals(1, matchScore.getCurrentSet());
+        Assertions.assertEquals(6, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(6, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -232,13 +232,13 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(6);
         matchScore.setP2CurrentSetScore(6);
         calculationService.calculate(1, matchScore);
-        Assert.assertEquals(1, matchScore.getP1MatchScore());
-        Assert.assertFalse(matchScore.isTieBreak());
-        Assert.assertEquals(2, matchScore.getCurrentSet());
-        Assert.assertEquals(0, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP1MatchScore());
+        Assertions.assertFalse(matchScore.isTieBreak());
+        Assertions.assertEquals(2, matchScore.getCurrentSet());
+        Assertions.assertEquals(0, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -248,13 +248,13 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(6);
         matchScore.setP2CurrentSetScore(6);
         calculationService.calculate(2, matchScore);
-        Assert.assertEquals(1, matchScore.getP2MatchScore());
-        Assert.assertFalse(matchScore.isTieBreak());
-        Assert.assertEquals(2, matchScore.getCurrentSet());
-        Assert.assertEquals(0, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP2MatchScore());
+        Assertions.assertFalse(matchScore.isTieBreak());
+        Assertions.assertEquals(2, matchScore.getCurrentSet());
+        Assertions.assertEquals(0, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -265,13 +265,13 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(6);
         matchScore.setP2CurrentSetScore(6);
         calculationService.calculate(1, matchScore);
-        Assert.assertTrue(matchScore.isTieBreak());
-        Assert.assertEquals(0, matchScore.getP1MatchScore());
-        Assert.assertEquals(1, matchScore.getCurrentSet());
-        Assert.assertEquals(6, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(6, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(7, matchScore.getP1CurrentScore());
-        Assert.assertEquals(6, matchScore.getP2CurrentScore());
+        Assertions.assertTrue(matchScore.isTieBreak());
+        Assertions.assertEquals(0, matchScore.getP1MatchScore());
+        Assertions.assertEquals(1, matchScore.getCurrentSet());
+        Assertions.assertEquals(6, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(6, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(7, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(6, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -282,13 +282,13 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(6);
         matchScore.setP2CurrentSetScore(6);
         calculationService.calculate(2, matchScore);
-        Assert.assertTrue(matchScore.isTieBreak());
-        Assert.assertEquals(0, matchScore.getP2MatchScore());
-        Assert.assertEquals(1, matchScore.getCurrentSet());
-        Assert.assertEquals(6, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(6, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(6, matchScore.getP1CurrentScore());
-        Assert.assertEquals(7, matchScore.getP2CurrentScore());
+        Assertions.assertTrue(matchScore.isTieBreak());
+        Assertions.assertEquals(0, matchScore.getP2MatchScore());
+        Assertions.assertEquals(1, matchScore.getCurrentSet());
+        Assertions.assertEquals(6, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(6, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(6, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(7, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -299,13 +299,13 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(6);
         matchScore.setP2CurrentSetScore(6);
         calculationService.calculate(1, matchScore);
-        Assert.assertEquals(1, matchScore.getP1MatchScore());
-        Assert.assertFalse(matchScore.isTieBreak());
-        Assert.assertEquals(2, matchScore.getCurrentSet());
-        Assert.assertEquals(0, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP1MatchScore());
+        Assertions.assertFalse(matchScore.isTieBreak());
+        Assertions.assertEquals(2, matchScore.getCurrentSet());
+        Assertions.assertEquals(0, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -316,13 +316,13 @@ public class CalculationTest {
         matchScore.setP1CurrentSetScore(6);
         matchScore.setP2CurrentSetScore(6);
         calculationService.calculate(2, matchScore);
-        Assert.assertEquals(1, matchScore.getP2MatchScore());
-        Assert.assertFalse(matchScore.isTieBreak());
-        Assert.assertEquals(2, matchScore.getCurrentSet());
-        Assert.assertEquals(0, matchScore.getP1CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentSetScore());
-        Assert.assertEquals(0, matchScore.getP1CurrentScore());
-        Assert.assertEquals(0, matchScore.getP2CurrentScore());
+        Assertions.assertEquals(1, matchScore.getP2MatchScore());
+        Assertions.assertFalse(matchScore.isTieBreak());
+        Assertions.assertEquals(2, matchScore.getCurrentSet());
+        Assertions.assertEquals(0, matchScore.getP1CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentSetScore());
+        Assertions.assertEquals(0, matchScore.getP1CurrentScore());
+        Assertions.assertEquals(0, matchScore.getP2CurrentScore());
     }
 
     @Test
@@ -332,8 +332,8 @@ public class CalculationTest {
         matchScore.setP1CurrentScore(3);
         matchScore.setP1CurrentSetScore(5);
         calculationService.calculate(1, matchScore);
-        Assert.assertTrue(matchScore.isMatchEnded());
-        Assert.assertEquals(matchScore.getMatch().getWinner(), matchScore.getMatch().getPlayer1());
+        Assertions.assertTrue(matchScore.isMatchEnded());
+        Assertions.assertEquals(matchScore.getMatch().getWinner(), matchScore.getMatch().getPlayer1());
     }
 
     @Test
@@ -343,8 +343,8 @@ public class CalculationTest {
         matchScore.setP2CurrentScore(3);
         matchScore.setP2CurrentSetScore(5);
         calculationService.calculate(2, matchScore);
-        Assert.assertTrue(matchScore.isMatchEnded());
-        Assert.assertEquals(matchScore.getMatch().getWinner(), matchScore.getMatch().getPlayer2());
+        Assertions.assertTrue(matchScore.isMatchEnded());
+        Assertions.assertEquals(matchScore.getMatch().getWinner(), matchScore.getMatch().getPlayer2());
     }
 
     @Test
@@ -354,9 +354,9 @@ public class CalculationTest {
         matchScore.setP1CurrentScore(3);
         matchScore.setP1CurrentSetScore(5);
         calculationService.calculate(1, matchScore);
-        Assert.assertFalse(matchScore.isMatchEnded());
-        Assert.assertEquals(1, matchScore.getP1MatchScore());
-        Assert.assertNull(matchScore.getMatch().getWinner());
+        Assertions.assertFalse(matchScore.isMatchEnded());
+        Assertions.assertEquals(1, matchScore.getP1MatchScore());
+        Assertions.assertNull(matchScore.getMatch().getWinner());
     }
 
     @Test
@@ -366,9 +366,9 @@ public class CalculationTest {
         matchScore.setP2CurrentScore(3);
         matchScore.setP2CurrentSetScore(5);
         calculationService.calculate(2, matchScore);
-        Assert.assertFalse(matchScore.isMatchEnded());
-        Assert.assertEquals(1, matchScore.getP2MatchScore());
-        Assert.assertNull(matchScore.getMatch().getWinner());
+        Assertions.assertFalse(matchScore.isMatchEnded());
+        Assertions.assertEquals(1, matchScore.getP2MatchScore());
+        Assertions.assertNull(matchScore.getMatch().getWinner());
     }
 
     @Test
@@ -379,8 +379,8 @@ public class CalculationTest {
         matchScore.setP1CurrentScore(3);
         matchScore.setP1CurrentSetScore(5);
         calculationService.calculate(1, matchScore);
-        Assert.assertTrue(matchScore.isMatchEnded());
-        Assert.assertEquals(matchScore.getMatch().getWinner(), matchScore.getMatch().getPlayer1());
+        Assertions.assertTrue(matchScore.isMatchEnded());
+        Assertions.assertEquals(matchScore.getMatch().getWinner(), matchScore.getMatch().getPlayer1());
     }
 
     @Test
@@ -391,7 +391,7 @@ public class CalculationTest {
         matchScore.setP2CurrentScore(3);
         matchScore.setP2CurrentSetScore(5);
         calculationService.calculate(2, matchScore);
-        Assert.assertTrue(matchScore.isMatchEnded());
-        Assert.assertEquals(matchScore.getMatch().getWinner(), matchScore.getMatch().getPlayer2());
+        Assertions.assertTrue(matchScore.isMatchEnded());
+        Assertions.assertEquals(matchScore.getMatch().getWinner(), matchScore.getMatch().getPlayer2());
     }
 }
