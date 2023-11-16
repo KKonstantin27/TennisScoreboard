@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import models.Player;
 import org.hibernate.Session;

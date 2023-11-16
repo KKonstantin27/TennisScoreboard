@@ -1,6 +1,6 @@
 package controllers;
 
-import DTO.MatchScoreDTO;
+import dto.MatchScoreDTO;
 import models.MatchScore;
 
 import javax.servlet.RequestDispatcher;

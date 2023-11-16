@@ -1,4 +1,4 @@
-import DAO.PlayerDAO;
+import dao.PlayerDAO;
 import models.Match;
 import models.MatchScore;
 import models.Player;

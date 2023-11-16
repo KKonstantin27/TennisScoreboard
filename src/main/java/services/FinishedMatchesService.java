@@ -1,6 +1,6 @@
 package services;
 
-import DAO.MatchDAO;
+import dao.MatchDAO;
 import models.Match;
 import models.Player;
 

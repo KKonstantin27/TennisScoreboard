@@ -1,6 +1,6 @@
 package models;
 
-import DTO.MatchDTO;
+import dto.MatchDTO;
 import lombok.Data;
 
 import java.util.List;

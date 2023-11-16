@@ -1,6 +1,8 @@
 package controllers;
 
-import DTO.MatchDTO;
+import dto.MatchDTO;
+import exceptions.InvalidNameFormatForSearchException;
+import exceptions.PlayerDoesNotExistException;
 import models.Match;
 import models.Page;
 import models.Player;
@@ -26,31 +28,29 @@ public class MatchListServlet extends BaseServlet {
         List<Match> matches;
         if (playerName == null) {
             matches = finishedMatchesService.readFinishedMatches();
+            prepareMatchListContent(request, response, matches, currentPage);
         } else if (validator.isValidUserInput(playerName)) {
             Optional<Player> playerOPT = playerDAO.getByName(playerName.toUpperCase());
             if (playerOPT.isEmpty()) {
-                request.setAttribute("error", "Игрок отсутствует в БД");
-                response.setStatus(404);
                 matches = finishedMatchesService.readFinishedMatches();
+                prepareMatchListContent(request, response, matches, currentPage);
+                throw new PlayerDoesNotExistException("Игрок отсутствует в БД");
             } else {
                 request.setAttribute("filter_by_player_name", playerName);
                 matches = finishedMatchesService.readFinishedMatch(playerOPT.get());
+                prepareMatchListContent(request, response, matches, currentPage);
             }
         } else {
-            request.setAttribute("error", "Некорректный формат имени игрока");
-            response.setStatus(400);
             matches = finishedMatchesService.readFinishedMatches();
+            prepareMatchListContent(request, response, matches, currentPage);
+            throw new InvalidNameFormatForSearchException("Некорректный формат имени игрока");
         }
-        List<MatchDTO> matchesDTO = mapper.convertToDTO(matches);
-        Page page = new Page(matchesDTO, matches.size(), currentPage);
-        List<MatchDTO> currentPageMatchesDTO = page.getCurrentPageMatches();
-        setMatchListAttributes(request, response, currentPageMatchesDTO, page);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/view/matchList.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String currentPage = request.getParameter("page") == null ? "1" : request.getParameter("page");
         String playerName = request.getParameter("filter_by_player_name");
         String url;
@@ -61,5 +61,13 @@ public class MatchListServlet extends BaseServlet {
                     + "&filter_by_player_name=" + URLEncoder.encode(playerName, StandardCharsets.UTF_8);
         }
         response.sendRedirect(url);
+    }
+
+    private void prepareMatchListContent(HttpServletRequest request, HttpServletResponse response,
+                                           List<Match> matches, int currentPage) {
+        List<MatchDTO> matchesDTO = mapper.convertToDTO(matches);
+        Page page = new Page(matchesDTO, matches.size(), currentPage);
+        List<MatchDTO> currentPageMatchesDTO = page.getCurrentPageMatches();
+        setMatchListAttributes(request, response, currentPageMatchesDTO, page);
     }
 }

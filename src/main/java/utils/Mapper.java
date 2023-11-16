@@ -1,7 +1,7 @@
 package utils;
 
-import DTO.MatchDTO;
-import DTO.MatchScoreDTO;
+import dto.MatchDTO;
+import dto.MatchScoreDTO;
 import models.Match;
 import models.MatchScore;
 

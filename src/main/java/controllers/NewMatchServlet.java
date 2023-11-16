@@ -1,5 +1,7 @@
 package controllers;
 
+import exceptions.InvalidNameFormatForCreationException;
+import exceptions.SamePlayersException;
 import models.Player;
 
 import javax.servlet.RequestDispatcher;
@@ -26,13 +28,9 @@ public class NewMatchServlet extends BaseServlet {
         String player1Name = request.getParameter("first-player-name");
         String player2Name = request.getParameter("second-player-name");
         if (!validator.isValidUserInput(player1Name) || !validator.isValidUserInput(player2Name)) {
-            request.setAttribute("error", "Некорректный формат имени игрока");
-            response.setStatus(400);
-            doGet(request, response);
+            throw new InvalidNameFormatForCreationException("Некорректный формат имени игрока");
         } else if (player1Name.equalsIgnoreCase(player2Name)) {
-            request.setAttribute("error", "Необходимо указать разных игроков");
-            response.setStatus(400);
-            doGet(request, response);
+            throw new SamePlayersException("Необходимо указать разных игроков");
         }
         Optional<Player> player1Opt = playerDAO.getByName(player1Name.toUpperCase());
         Optional<Player> player2Opt = playerDAO.getByName(player2Name.toUpperCase());
